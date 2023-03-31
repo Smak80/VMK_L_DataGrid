@@ -19,16 +19,31 @@ namespace VMK_L2k_2023_03_21_DataGrid
             InitializeComponent();
             foreach (var type in Enum.GetNames<Dish.DishType>())
             {
-                comboBox1.Items.Add(type);
+                cbType.Items.Add(type);
             }
             nudId.DataBindings.Add(nameof(NumericUpDown.Value), dish, nameof(Dish.Id));
             tbName.DataBindings.Add(nameof(TextBox.Text), dish, nameof(Dish.Name));
             trBRating.DataBindings.Add(nameof(TrackBar.Value), dish, nameof(Dish.IntRating));
-            comboBox1.DataBindings.Add(nameof(ComboBox.SelectedIndex), dish, nameof(Dish.Type));
-            // Закончить (добавить 2 свойства)
-            // Значение выбора на trackBar добавить в виде метки
-            // Редактирование записей
+            cbType.DataBindings.Add(nameof(ComboBox.SelectedIndex), dish, nameof(Dish.IntType));
+            nudPrice.DataBindings.Add(nameof(NumericUpDown.Value), dish, nameof(Dish.Price));
+            nudCalories.DataBindings.Add(nameof(NumericUpDown.Value), dish, nameof(Dish.Calories));
+            
             // Обработка исключений
+        }
+
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+        }
+
+        private void trBRating_ValueChanged(object sender, EventArgs e)
+        {
+            lblRating.Text = $"Рейтинг: {trBRating.Value / 100f}";
         }
     }
 }

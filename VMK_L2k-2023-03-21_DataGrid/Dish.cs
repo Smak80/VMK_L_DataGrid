@@ -55,12 +55,22 @@ namespace VMK_L2k_2023_03_21_DataGrid
         }
 
         [DisplayName("Категория")]
-        public DishType Type { get => type;
+        public DishType Type { 
+            get => type;
             set
             {
                 type = value; OnPropertyChanged(nameof(Type));
             }
         }
+
+        [Browsable(false)]
+        [JsonIgnore]
+        public int IntType
+        {
+            get => (int)Type;
+            set => Type = (DishType)value;
+        }
+
         [DisplayName("Цена")]
         public double Price { get => price;
             set
@@ -83,12 +93,15 @@ namespace VMK_L2k_2023_03_21_DataGrid
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        //protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
-        //{
-        //    if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-        //    field = value;
-        //    OnPropertyChanged(propertyName);
-        //    return true;
-        //}
+        public Dish Clone() => new Dish()
+        {
+            Id = this.Id,
+            Name = this.Name,
+            Rating = this.Rating,
+            Type = this.Type,
+            Price = this.Price,
+            Calories = this.Calories
+        };
+
     }
 }

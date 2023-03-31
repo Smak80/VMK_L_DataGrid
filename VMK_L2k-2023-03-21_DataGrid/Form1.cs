@@ -58,8 +58,51 @@ namespace VMK_L2k_2023_03_21_DataGrid
             newDish.Id = 333;
             newDish.Rating = 3.33f;
             EditForm ef = new(newDish);
-            ef.ShowDialog(this);
-            _dishies.Add(newDish);
+            if (ef.ShowDialog(this) == DialogResult.OK)
+            {
+                _dishies.Add(newDish);
+            }
+        }
+
+        private void изменитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0) { 
+                var currentRow = dataGridView1.SelectedRows[0].Index;
+                var tmpDish = _dishies[(int)currentRow].Clone();
+                EditForm ef = new(tmpDish);
+                if (ef.ShowDialog(this) == DialogResult.OK)
+                {
+                    _dishies[(int)currentRow] = tmpDish;
+                }
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Не выбрана запись для редактирования.",
+                    "Упс!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                    );
+            }
+
+        }
+
+        private void удалитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var toDel = dataGridView1.SelectedRows[0].Index;
+                _dishies.RemoveAt(toDel);
+            }
+            catch
+            {
+                MessageBox.Show(
+                    "Не выбрана запись для удаления.",
+                    "Упс!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
         }
     }
 }
