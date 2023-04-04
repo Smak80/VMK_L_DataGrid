@@ -18,7 +18,7 @@ namespace VMK_L2k_2023_03_21_DataGrid
 
         private int id;
         private DishType type;
-        private string name;
+        private string name = "Новое блюдо";
         private float rating;
         private double price;
         private int calories;
@@ -35,6 +35,7 @@ namespace VMK_L2k_2023_03_21_DataGrid
         public string Name { get => name;
             set
             {
+                if (value.Trim().Length == 0) throw new Exception("Название блюда не может быть пустым");
                 name = value; OnPropertyChanged(nameof(Name));
             }
         }

@@ -64,6 +64,7 @@
             tbName.Name = "tbName";
             tbName.Size = new Size(361, 23);
             tbName.TabIndex = 7;
+            tbName.TextChanged += tbName_TextChanged;
             // 
             // nudId
             // 
@@ -169,7 +170,6 @@
             trBRating.TabIndex = 10;
             trBRating.TickFrequency = 50;
             trBRating.Value = 100;
-            trBRating.ValueChanged += trBRating_ValueChanged;
             // 
             // nudPrice
             // 
